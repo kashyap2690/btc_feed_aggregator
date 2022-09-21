@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package btcorderbook;
+
+service BTCOrderBookService{
+ 
+ rpc GetBTCFullOrderBook(OrderBookRequest) returns (OrderBookResponse) {}
+
+}
+
+message OrderBookRequest{
+    int32 depth = 1;
+}
+
+message OrderBookResponse {
+    map<string, string> bids = 1;
+    map<string, string> asks = 2;
+}

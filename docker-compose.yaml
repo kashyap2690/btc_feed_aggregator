@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+    btc_feed_aggregator:
+        build:
+            context: .
+            dockerfile: btc_feed_aggregator/Dockerfile
+        environment:
+            BINANCE_FEED_HOST: binance_feed
+            FTX_FEED_HOST: ftx_feed
+        image: btc_feed_aggregator
+        networks:
+            - microservices
+        ports:
+            - 5000:5000
+
+    binance_feed:
+        build:
+            context: .
+            dockerfile: binance_feed/Dockerfile
+        image: binance_feed
+        networks:
+            - microservices
+            
+    ftx_feed:
+        build:
+            context: .
+            dockerfile: ftx_feed/Dockerfile
+        image: ftx_feed
+        networks:
+            - microservices
+
+networks:
+    microservices:
